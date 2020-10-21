@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00e98ff64b149d439f1cd0356e04780, type: 3}
+  m_Name: Einarmon
+  m_EditorClassIdentifier: 
+  pkmnName: Einarmon
+  description: "Soy un excelente dibujante. En mis ratos libres me gusta comer camar\xF3n. "
+  front: {fileID: 21300000, guid: 303338dc534b61c4192458bf515e718c, type: 3}
+  back: {fileID: 21300000, guid: 2baf476038f9e6d44a85bae5f659eb4e, type: 3}
+  type: 1
+  maxHP: 10
+  attack: 10
+  defense: 88
+  spAttack: 1
+  spDefense: 1
+  speed: 30
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 94ae1709c4636d44690eca24541f20f0, type: 2}
+    atLevel: 1
