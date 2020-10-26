@@ -118,11 +118,9 @@ public class Player : MonoBehaviour
         var detector = Physics2D.OverlapCircle(interactPos, 0.3f, interactableLayer);
         if (detector != null){  // means there is an interactable object in front
             detector.GetComponent<Interactable>()?.Interact();
-
             // ?. is the null conditional operator. Only if the first operand is not null,
             // run the next function. That is, only if there is actually an interactable class.
             // this way the game doesn't crach if there is not an interctable class present
         }
     }
-
 }
