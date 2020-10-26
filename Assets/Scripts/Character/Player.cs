@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     private Animator animator;
     public LayerMask solidObjectsLayer;
     public LayerMask tallGrassLayer;
+    public LayerMask interactableLayer;
 
     public event Action OnStartBattle;
 
@@ -47,6 +48,11 @@ public class Player : MonoBehaviour
                 }
             }
             animator.SetBool("isMoving", isMoving);
+
+            // Implementar interacción
+            if (Input.GetKeyDown(KeyCode.Space)){
+                Interact();
+            }
         }
     }
 
@@ -84,7 +90,7 @@ public class Player : MonoBehaviour
         // podemos usar un Overlap Circle que es como un detector circular, funciona parecido a Raycast
         // Especificamos la posición, el radio del círculo y la layer en la que queremos que detecte.
 
-        if (Physics2D.OverlapCircle(newPosition, 0.1f, solidObjectsLayer) != null){
+        if (Physics2D.OverlapCircle(newPosition, 0.1f, solidObjectsLayer | interactableLayer) != null){
             // si no es null, significa que el espacio está ocupado
             // entonces no podemos avanzar y regresamos false
             Debug.Log("Solid Object Detected");
@@ -103,4 +109,20 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    void Interact(){
+        // determine facing direction by getting the x and y values of the animator
+        var facingDir = new Vector3(animator.GetFloat("movX"), animator.GetFloat("movY"));
+        var interactPos = transform.position + facingDir;
+        // we will check such positoin for an object in the interactable layer
+        var detector = Physics2D.OverlapCircle(interactPos, 0.3f, interactableLayer);
+        if (detector != null){  // means there is an interactable object in front
+            detector.GetComponent<Interactable>()?.Interact();
+
+            // ?. is the null conditional operator. Only if the first operand is not null,
+            // run the next function. That is, only if there is actually an interactable class.
+            // this way the game doesn't crach if there is not an interctable class present
+        }
+    }
+
 }
