@@ -4,7 +4,8 @@ using UnityEngine;
 
 public enum GameState {
     Roaming,
-    Battling
+    Battling,
+    Chatting,
 }
 
 public class GameManager : MonoBehaviour
@@ -16,9 +17,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] Camera mapCamera;
 
     void Start() {
+        // Aquí indicamos a qué eventos emitidos por otras clases nos estamos suscribiendo
+        // i.e. 'Escuchando'
+
         playerController.OnStartBattle += Battle;
         battleSystem.OnDefeat += EndBattle;
-        // notación indica: cuando script emita evento, += llamamos a nuestro método
+        DialogManager.Instance.OnStartDialog += () => {
+            // si empieza un diálogo, cambiamos estado a chatting
+            state = GameState.Chatting;
+        };
+        DialogManager.Instance.OnEndDialog += () => {
+            if (state == GameState.Chatting){
+                state = GameState.Roaming;
+            }
+        };
+        
+        // notación indica: cuando script emita evento, += corremos algo
 
     }
 
@@ -45,6 +59,9 @@ public class GameManager : MonoBehaviour
         }
         else if (state == GameState.Battling){
             battleSystem.HandleUpdate();
+        }
+        else if (state == GameState.Chatting){
+            DialogManager.Instance.HandleUpdate();
         }
     }
 

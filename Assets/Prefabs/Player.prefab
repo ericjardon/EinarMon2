@@ -104,6 +104,9 @@ MonoBehaviour:
   tallGrassLayer:
     serializedVersion: 2
     m_Bits: 512
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!95 &3514565272958500330
 Animator:
   serializedVersion: 3
