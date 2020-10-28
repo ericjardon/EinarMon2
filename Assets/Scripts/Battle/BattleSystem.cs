@@ -20,22 +20,30 @@ public class BattleSystem : MonoBehaviour
     BattleState state;
     int currentAction;
     int currentMove; 
+    bool isTrainerBattle=false;
 
-    public void StartBattle(){
+    Team pkmnTeam;
+    Pokemon enemyP;
+
+
+    public void StartBattle(Team pkmnTeam, Pokemon enemyP){
+        this.pkmnTeam = pkmnTeam;
+        this.enemyP = enemyP;
         StartCoroutine(SetupBattle());
     }
 
     public void HandleUpdate(){
         if(state== BattleState.PlayerAction){
-            HandleAS();
+            StartCoroutine(HandleAS());
         }else if(state==BattleState.PlayerMove){
             HandleMS();
         }
     }
 
     public IEnumerator SetupBattle(){
-        playerU.Setup();        // el método setup de una playerunit sirve para que se carguen sus atributos, sus sprites, etc.
-        enemyU.Setup();
+        // el método setup de una playerunit sirve para que se carguen sus atributos, sus sprites, etc.
+        playerU.Setup(pkmnTeam.GetAlivePokemon()); // Llamamos a la funcion GetAlivePokemon para que el player inicie la batalla con el primer pokemon vivo que tenga   
+        enemyU.Setup(enemyP);
         playerH.SetData(playerU.pkmn);
         enemyH.SetData(enemyU.pkmn);
         // el atributo pkmn de una BattleUnit es ...
@@ -71,7 +79,20 @@ public class BattleSystem : MonoBehaviour
             // aquí sería llamar a alguna animación
 
             yield return new WaitForSeconds(2f);
-            OnDefeat(false);     // jugador perdió la pelea
+            var NextAlivePokemon = pkmnTeam.GetAlivePokemon();
+            if (NextAlivePokemon != null){
+                // el método setup de una playerunit sirve para que se carguen sus atributos, sus sprites, etc.
+                playerU.Setup(NextAlivePokemon); // Llamamos a la funcion GetAlivePokemon para que el player inicie la batalla con el primer pokemon vivo que tenga
+                playerH.SetData(NextAlivePokemon);
+                dialogB.NameMoves(NextAlivePokemon.Moves); 
+                // escribir en la dialog box los movimientos existentes para el pokemon que tenemos
+
+                yield return dialogB.TD($"Attack {NextAlivePokemon.pBase.GetPName}");
+                PlayerAction();
+            }else{
+                OnDefeat(false);     // jugador perdió la pelea
+            }
+            
         }else{
             PlayerAction();
         }
@@ -134,7 +155,7 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    void HandleAS(){
+    IEnumerator HandleAS(){
         if(Input.GetKeyDown(KeyCode.DownArrow)){
             if(currentAction < 1)
                 ++currentAction;
@@ -149,7 +170,15 @@ public class BattleSystem : MonoBehaviour
             if(currentAction==0){
                 PlayerMove();
             }else if(currentAction==1){
-                OnDefeat(true);     // termina la batalla por mientras
+                // Cuando el player este luchando contra un entrenador enemigo no pueda escapar
+                if (isTrainerBattle){
+                    yield return dialogB.TD("You can't run away from your destiny");
+                    yield return new WaitForSeconds(1f);
+                    PlayerAction();
+                }else{
+                    OnDefeat(true); 
+                }
+                    // termina la batalla por mientras
             }
         }
     }
