@@ -89,6 +89,8 @@ public class LearnableMove
 public enum PKMNType
 {
     NoType,
+    Mecha,
+    Demon,
     Normal,
     Fire,
     Grass,

@@ -5,14 +5,13 @@ using UnityEngine.UI;
 
 public class BattleUnit : MonoBehaviour
 {
-    [SerializeField] PokemonBase pBase;
-    [SerializeField] int lvl;
+    
     [SerializeField] bool isPlayerUnit;
 
     public Pokemon pkmn { get; set; }
 
-    public void Setup(){
-        pkmn = new Pokemon(pBase,lvl);
+    public void Setup(Pokemon pokemon){
+        pkmn = pokemon;
         if (isPlayerUnit)
             GetComponent<Image>().sprite= pkmn.pBase.GetBack;
         else

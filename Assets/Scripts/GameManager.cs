@@ -41,7 +41,9 @@ public class GameManager : MonoBehaviour
         battleSystem.gameObject.SetActive(true);    // activamos la vista de modo pelea
         mapCamera.gameObject.SetActive(false);      // desactivamos la vista el terreno
 
-        battleSystem.StartBattle();
+        var Team = playerController.GetComponent<Team>();
+        var enemyP = FindObjectOfType<AreaPokemons>().GetRandomPkmn();
+        battleSystem.StartBattle(Team, enemyP);
 
     }
 

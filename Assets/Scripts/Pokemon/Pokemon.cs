@@ -1,19 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
 public class Pokemon
 {
-    public PokemonBase pBase { get; set; } 
-    public int pLvl { get; set; }
+
+    [SerializeField] PokemonBase _base;
+    [SerializeField] int level;
+
+    public PokemonBase pBase { 
+        get {
+            return _base;
+        }
+     } 
+    public int pLvl { 
+        get {
+            return level;
+        }
+     }
 
     public int HP {get; set;}
     public List<Move> Moves {get; set;}     // esa sintaxis crea la propiedad y añade metodos get y set en una sola línea
 
-
-    public Pokemon(PokemonBase pBase, int pLvl){
-        this.pBase = pBase;
-        this.pLvl = pLvl;
+    // We change the constructor to this new function Init() who is the one that initializes a Pokemon.
+    public void Init(){
+        
         this.HP = MaxHP;
 
         // recién creado no tiene movimientos.
@@ -35,6 +46,7 @@ public class Pokemon
     public int Attack {
         get { return Mathf.FloorToInt((pBase.GetAttack*pLvl) / 100f) +5; }
         // fórmula utilizada por los juegos de pkmn reales. FloorToInt redondea hacia abajo 
+        // Formel, die von echten pkmn-Spielen verwendet wird. FloorToInt rundet ab
     }
     public int SpAttack {
         get { return Mathf.FloorToInt((pBase.GetSpAttk*pLvl) / 100f) +5; }

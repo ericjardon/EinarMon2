@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00e98ff64b149d439f1cd0356e04780, type: 3}
+  m_Name: Blubot
+  m_EditorClassIdentifier: 
+  pkmnName: 
+  description: 
+  front: {fileID: 21300000, guid: 11d5334abb7f61b42b70afecf89cfc65, type: 3}
+  back: {fileID: 21300000, guid: 11d5334abb7f61b42b70afecf89cfc65, type: 3}
+  type: 1
+  maxHP: 50
+  attack: 10
+  defense: 30
+  spAttack: 2
+  spDefense: 3
+  speed: 10
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 4fc1df8fa46690841bbc5c5237cd4a9b, type: 2}
+    atLevel: 5
+  - moveBase: {fileID: 11400000, guid: 88435ae81882d784ab2e06298cfcc981, type: 2}
+    atLevel: 5
