@@ -14,6 +14,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] BattleUnit enemyU;
     [SerializeField] BattleHud enemyH;
     [SerializeField] DialogBox dialogB;
+    [SerializeField] TeamScreen teamScreen;
 
     public event Action<bool> OnDefeat;         // usa un parámetro booleano para saber quién perdió
 
@@ -46,7 +47,9 @@ public class BattleSystem : MonoBehaviour
         enemyU.Setup(enemyP);
         playerH.SetData(playerU.pkmn);
         enemyH.SetData(enemyU.pkmn);
-        // el atributo pkmn de una BattleUnit es ...
+        
+        
+        teamScreen.Init();
 
         dialogB.NameMoves(playerU.pkmn.Moves); 
         // escribir en la dialog box los movimientos existentes para el pokemon que tenemos
@@ -65,15 +68,46 @@ public class BattleSystem : MonoBehaviour
         dialogB.ShowAS(true);
     }
 
+
+    void ViewTeamScreen() {
+        teamScreen.SetTeamData(pkmnTeam.Pokemons);
+        teamScreen.gameObject.SetActive(true);
+    }
+
+
+    IEnumerator ExcecutePlayerMove(){
+        state = BattleState.Busy;
+        var move =playerU.pkmn.Moves[currentMove];
+        move.PP --; // reducir el PP del movimiento y actualizar en HUD
+        yield return dialogB.TD($"{playerU.pkmn.pBase.GetPName} used {move.Base.GetMoveName()}");
+        yield return new WaitForSeconds(1f);
+        bool isDefeated =enemyU.pkmn.DealDamage(move, playerU.pkmn);
+
+        yield return enemyH.AffectHP();
+        if (isDefeated){
+            yield return dialogB.TD($"{enemyU.pkmn.pBase.GetPName} was defeated");
+            // aquí llamaríamos a la animación
+
+            yield return new WaitForSeconds(2f);
+            OnDefeat(true);     // jugador ganó la pelea
+
+        }else{
+            StartCoroutine(ExcecuteEnemyMove());
+        }
+    }
+
     IEnumerator ExcecuteEnemyMove(){
         state = BattleState.EnemyMove;
         var move =enemyU.pkmn.ChooseMove();
+        move.PP --;
+        
         yield return dialogB.TD($"{enemyU.pkmn.pBase.GetPName} used {move.Base.GetMoveName()}");
         yield return new WaitForSeconds(1f);
-        bool isMorido =playerU.pkmn.DealDamage(move, enemyU.pkmn);
+        
+        bool isDefeated =playerU.pkmn.DealDamage(move, enemyU.pkmn);
 
         yield return playerH.AffectHP();
-        if (isMorido){
+        if (isDefeated){
             yield return dialogB.TD($"{playerU.pkmn.pBase.GetPName} was defeated");
 
             // aquí sería llamar a alguna animación
@@ -90,36 +124,15 @@ public class BattleSystem : MonoBehaviour
                 yield return dialogB.TD($"Attack {NextAlivePokemon.pBase.GetPName}");
                 PlayerAction();
             }else{
-                OnDefeat(false);     // jugador perdió la pelea
+                OnDefeat(false);     // false porque jugador perdió la pelea
             }
             
         }else{
+            // si derrota al pokemon agual y ya no hay pokemon restantes en el Team
             PlayerAction();
         }
     } 
 
-    IEnumerator ExcecutePlayerMove(){
-        state = BattleState.Busy;
-        var move =playerU.pkmn.Moves[currentMove];
-        yield return dialogB.TD($"{playerU.pkmn.pBase.GetPName} used {move.Base.GetMoveName()}");
-        yield return new WaitForSeconds(1f);
-        bool isMorido =enemyU.pkmn.DealDamage(move, playerU.pkmn);
-
-        yield return enemyH.AffectHP();
-        if (isMorido){
-            yield return dialogB.TD($"{enemyU.pkmn.pBase.GetPName} was defeated");
-            // aquí llamaríamos a la animación
-
-            yield return new WaitForSeconds(2f);
-            OnDefeat(true);     // jugador ganó la pelea
-
-        }else{
-            StartCoroutine(ExcecuteEnemyMove());
-        }
-        
-    }
-
-    
 
     void PlayerMove(){
         state = BattleState.PlayerMove;
@@ -129,47 +142,58 @@ public class BattleSystem : MonoBehaviour
     }
 
 
-
+    /*Handler para selección de Move*/
     void HandleMS(){
-        if(Input.GetKeyDown(KeyCode.RightArrow)){
-            if(currentMove < playerU.pkmn.Moves.Count-1)
-                ++currentMove;
-        }else if(Input.GetKeyDown(KeyCode.LeftArrow)){
-            if(currentMove > 0)
-                --currentMove;
-        }else if(Input.GetKeyDown(KeyCode.DownArrow)){
-            if(currentMove < playerU.pkmn.Moves.Count - 2)
-                currentMove += 2;
-        }else if(Input.GetKeyDown(KeyCode.UpArrow)){
-            if(currentMove > 1)
-                currentMove -= 2;
+        if (Input.GetKeyDown(KeyCode.RightArrow)){
+                    ++currentMove;
+        } else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+            --currentMove;
+        } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
+            currentMove += 2;     // mueve dos espacios para quedar directamente abajo
+        } else if (Input.GetKeyDown(KeyCode.UpArrow)){
+            currentMove -= 2;
         }
+        // Solo hay 4 opciones, entonces 4 índices. Podemos usar Mathf.Clamp() para restringir el rango de valores
+        // que puede tener currentAction: entre 0 y 3. 
+        currentMove = Mathf.Clamp(currentMove, 0, playerU.pkmn.Moves.Count - 1);
 
-        dialogB.UpdateMS(currentMove, playerU.pkmn.Moves[currentMove]);
+        dialogB.UpdateMS(currentMove, playerU.pkmn.Moves[currentMove]);     // resalta la selección de color
 
         if(Input.GetKeyDown(KeyCode.Return)){
             dialogB.ShowMS(false);
             dialogB.ShowDT(true);
             StartCoroutine(ExcecutePlayerMove());
         }
-
+        if (Input.GetKeyDown(KeyCode.Backspace)){
+            dialogB.ShowMS(false);
+            dialogB.ShowDT(true);   // habilitamos dialog text y deshabilitamos move selector
+            PlayerAction();
+        }
     }
 
+    /*Handler para selección de Acción*/
     IEnumerator HandleAS(){
-        if(Input.GetKeyDown(KeyCode.DownArrow)){
-            if(currentAction < 1)
-                ++currentAction;
-        }else if(Input.GetKeyDown(KeyCode.UpArrow)){
-            if(currentAction>0)
-                --currentAction;
+
+        if (Input.GetKeyDown(KeyCode.RightArrow)){
+            ++currentAction;
+        } else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+            --currentAction;
+        } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
+            currentAction += 2;     // mueve dos espacios para quedar directamente abajo
+        } else if (Input.GetKeyDown(KeyCode.UpArrow)){
+            currentAction -= 2;
         }
+        currentAction = Mathf.Clamp(currentAction, 0,3);       // misma lógica que para Move Selector
 
         dialogB.UpdateAS(currentAction);
 
         if(Input.GetKeyDown(KeyCode.Return)){
             if(currentAction==0){
                 PlayerMove();
-            }else if(currentAction==1){
+            } else if (currentAction==2){
+                ViewTeamScreen();
+                
+            } else if(currentAction==3){
                 // Cuando el player este luchando contra un entrenador enemigo no pueda escapar
                 if (isTrainerBattle){
                     yield return dialogB.TD("You can't run away from your destiny");
@@ -182,5 +206,4 @@ public class BattleSystem : MonoBehaviour
             }
         }
     }
-
 }

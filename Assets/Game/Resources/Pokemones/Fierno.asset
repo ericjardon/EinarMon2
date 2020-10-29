@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00e98ff64b149d439f1cd0356e04780, type: 3}
   m_Name: Fierno
   m_EditorClassIdentifier: 
-  pkmnName: 
-  description: 'Fierno '
+  pkmnName: Fierno
+  description: An apprentice demon coming from the Underworld, looking to become
+    a professional devil.
   front: {fileID: 21300000, guid: 3b7c28d57fe16ad4c91265f28f0d772d, type: 3}
   back: {fileID: 21300000, guid: 40ab44077c313834d9d82cd209b560b4, type: 3}
-  type: 2
+  type: 4
   maxHP: 10
   attack: 15
   defense: 5

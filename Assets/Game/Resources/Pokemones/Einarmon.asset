@@ -16,7 +16,7 @@ MonoBehaviour:
   description: "Soy un excelente dibujante. En mis ratos libres me gusta comer camar\xF3n. "
   front: {fileID: 21300000, guid: 303338dc534b61c4192458bf515e718c, type: 3}
   back: {fileID: 21300000, guid: 2baf476038f9e6d44a85bae5f659eb4e, type: 3}
-  type: 1
+  type: 2
   maxHP: 10
   attack: 10
   defense: 88
