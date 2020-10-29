@@ -3,77 +3,74 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BattleState {Start, PlayerAction, PlayerMove, EnemyMove, Busy};
+public enum BattleState {
+    Start, 
+    PlayerAction, 
+    PlayerMove, 
+    EnemyMove, 
+    Busy,       // busy used for transitions between states when nothing is happening
+    TeamScreen
+};
 
 public class BattleSystem : MonoBehaviour
 {
-    // SerializeField sirve para hacer público algo en nuestro Editor (?). 
+    // SerializeField sirve para poder definir el valor desde el Inspector de Unity
     [SerializeField] BattleUnit playerU;
-    [SerializeField] BattleHud playerH;
-
     [SerializeField] BattleUnit enemyU;
+    [SerializeField] BattleHud playerH;
     [SerializeField] BattleHud enemyH;
     [SerializeField] DialogBox dialogB;
     [SerializeField] TeamScreen teamScreen;
 
-    public event Action<bool> OnDefeat;         // usa un parámetro booleano para saber quién perdió
-
+    public event Action<bool> OnDefeat;         // Emite un evento al terminar batalla que indica quién perdió
     BattleState state;
-    int currentAction;
-    int currentMove; 
-    bool isTrainerBattle=false;
+    bool isTrainerBattle=false;         // para distinguir wild pokemon de Rival Battle
 
-    Team pkmnTeam;
+    // índices de selección. En C#, value de un int es 0 por default
+    int currentAction;
+    int currentMove;
+    int currentMember;
+
+    // Objetos específicos a la batalla
+    Team playerTeam;
     Pokemon enemyP;
 
 
-    public void StartBattle(Team pkmnTeam, Pokemon enemyP){
-        this.pkmnTeam = pkmnTeam;
+    public void StartBattle(Team playerTeam, Pokemon enemyP){
+        this.playerTeam = playerTeam;
         this.enemyP = enemyP;
         StartCoroutine(SetupBattle());
     }
 
     public void HandleUpdate(){
+        // aquí llamamos a los Handlers de acuerdo con el estado actual. 
         if(state== BattleState.PlayerAction){
-            StartCoroutine(HandleAS());
+            StartCoroutine(HandleAS());     // handler Action Selector
         }else if(state==BattleState.PlayerMove){
-            HandleMS();
+            HandleMS();     // handler move selection
+        }else if (state==BattleState.TeamScreen){
+            HandleTS();     // handler Team selection  
         }
     }
 
     public IEnumerator SetupBattle(){
         // el método setup de una playerunit sirve para que se carguen sus atributos, sus sprites, etc.
-        playerU.Setup(pkmnTeam.GetAlivePokemon()); // Llamamos a la funcion GetAlivePokemon para que el player inicie la batalla con el primer pokemon vivo que tenga   
+        playerU.Setup(playerTeam.GetAlivePokemon()); // Llamamos a la funcion GetAlivePokemon para que el player inicie la batalla con el primer pokemon vivo que tenga   
         enemyU.Setup(enemyP);
         playerH.SetData(playerU.pkmn);
         enemyH.SetData(enemyU.pkmn);
-        
-        
         teamScreen.Init();
 
-        dialogB.NameMoves(playerU.pkmn.Moves); 
+        dialogB.SetMoveNames(playerU.pkmn.Moves); 
         // escribir en la dialog box los movimientos existentes para el pokemon que tenemos
 
-        yield return dialogB.TD($"A wild {enemyU.pkmn.pBase.GetPName} appeared");
-        // hasta que no se termine de hacer lo de arriba no podemos correr esta línea. Es llamada asíncrona.
-                
+        // uso de yield return detiene ejecución de función actual y corre por completo la función indicada en return
+        yield return dialogB.TD($"A wild {enemyU.pkmn.pBase.GetPName} appeared");   
         yield return new WaitForSeconds(1f);    // hardcodeamos 1 segundo para dar tiempo de lectura 
+        // resumimos ejecución de SetupBattle
 
         PlayerAction();
     }
-
-    public void PlayerAction(){
-        state= BattleState.PlayerAction;
-        StartCoroutine(dialogB.TD("Choose an action"));
-        dialogB.ShowAS(true);
-    }
-
-
-    void ViewTeamScreen() {
-        teamScreen.SetTeamData(pkmnTeam.Pokemons);
-        teamScreen.gameObject.SetActive(true);
-    }
-
 
     IEnumerator ExcecutePlayerMove(){
         state = BattleState.Busy;
@@ -113,26 +110,34 @@ public class BattleSystem : MonoBehaviour
             // aquí sería llamar a alguna animación
 
             yield return new WaitForSeconds(2f);
-            var NextAlivePokemon = pkmnTeam.GetAlivePokemon();
+            var NextAlivePokemon = playerTeam.GetAlivePokemon();
+            // Llamamos a la funcion GetAlivePokemon para saber si quedan Pokemones vivos en el Team
             if (NextAlivePokemon != null){
-                // el método setup de una playerunit sirve para que se carguen sus atributos, sus sprites, etc.
-                playerU.Setup(NextAlivePokemon); // Llamamos a la funcion GetAlivePokemon para que el player inicie la batalla con el primer pokemon vivo que tenga
-                playerH.SetData(NextAlivePokemon);
-                dialogB.NameMoves(NextAlivePokemon.Moves); 
-                // escribir en la dialog box los movimientos existentes para el pokemon que tenemos
+                // El jugador puede escoger el siguiente pokemon a sacar
+                ViewTeamScreen();
 
-                yield return dialogB.TD($"Attack {NextAlivePokemon.pBase.GetPName}");
-                PlayerAction();
             }else{
-                OnDefeat(false);     // false porque jugador perdió la pelea
-            }
-            
-        }else{
-            // si derrota al pokemon agual y ya no hay pokemon restantes en el Team
-            PlayerAction();
+                OnDefeat(false);     // si no quedan pokemon vivos, el jugador pierde la pelea
+            }    
+        }
+        else{
+            PlayerAction();     // es turno del player de atacar
         }
     } 
 
+    /*--- CHANGE OF STATE ---*/
+
+    public void PlayerAction(){
+        state= BattleState.PlayerAction;
+        StartCoroutine(dialogB.TD("Choose an action"));
+        dialogB.ShowAS(true);
+    }
+    
+    void ViewTeamScreen() {
+        state = BattleState.TeamScreen;
+        teamScreen.SetTeamData(playerTeam.Pokemons);
+        teamScreen.gameObject.SetActive(true);
+    }
 
     void PlayerMove(){
         state = BattleState.PlayerMove;
@@ -141,11 +146,12 @@ public class BattleSystem : MonoBehaviour
         dialogB.ShowMS(true);
     }
 
+    /* --- HANDLERS ESPECÍFICOS DE ESTADO DE BATALLA ---*/
 
-    /*Handler para selección de Move*/
+    // Move Selector
     void HandleMS(){
         if (Input.GetKeyDown(KeyCode.RightArrow)){
-                    ++currentMove;
+            ++currentMove;
         } else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
             --currentMove;
         } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
@@ -171,9 +177,8 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    /*Handler para selección de Acción*/
+    // Action Selector
     IEnumerator HandleAS(){
-
         if (Input.GetKeyDown(KeyCode.RightArrow)){
             ++currentAction;
         } else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
@@ -202,8 +207,70 @@ public class BattleSystem : MonoBehaviour
                 }else{
                     OnDefeat(true); 
                 }
-                    // termina la batalla por mientras
+                    // termina la batalla, por mientras
             }
         }
+    }
+
+    // Team Selector
+    void HandleTS(){
+        // Misma lógica de selección que Move Selection
+        if (Input.GetKeyDown(KeyCode.RightArrow)){
+            ++currentMember;
+        } else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+            --currentMember;
+        } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
+            currentMember += 2;     // mueve dos espacios para quedar directamente abajo
+        } else if (Input.GetKeyDown(KeyCode.UpArrow)){
+            currentMember -= 2;
+        }
+        print("Current selection: " + currentMember);
+
+        currentMember = Mathf.Clamp(currentMember, 0, playerTeam.Pokemons.Count - 1);
+        teamScreen.UpdateTS(currentMember);
+
+        if (Input.GetKeyDown(KeyCode.Backspace)){
+            teamScreen.gameObject.SetActive(false);
+            PlayerAction();     
+        }
+        else if (Input.GetKeyDown(KeyCode.Return)){
+            
+            var selected = playerTeam.Pokemons[currentMember];
+            if (selected.HP <= 0){
+                // no podemos escoger pokemon que no estén vivos, mostrar mensaje
+                teamScreen.SetInfoText($"Your {selected.pBase.GetPName} is out of combat!");
+                return;
+            }
+            if (selected == playerU.pkmn){
+                teamScreen.SetInfoText($"Your {selected.pBase.GetPName} is already in battle!");
+                return;
+            }
+
+            // Else, if selection is valid, perform the pokemon switch
+            teamScreen.gameObject.SetActive(false);
+            state = BattleState.Busy;
+            StartCoroutine(SwitchPokemon(selected));
+
+        }
+
+        IEnumerator SwitchPokemon(Pokemon nextPokemon){
+            if (playerU.pkmn.HP > 0){
+                // Es un switch voluntario, pokemon actual sigue vivo
+                yield return dialogB.TD($"Enough, {playerU.pkmn.pBase.GetPName}");
+                // TODO: AQUÍ IRÍA ANIMACIÓN DE SALIDA
+                yield return new WaitForSeconds(1f);
+            }
+
+            playerU.Setup(nextPokemon); 
+            playerH.SetData(nextPokemon);
+            dialogB.SetMoveNames(nextPokemon.Moves); 
+
+            yield return dialogB.TD($"Attack, {nextPokemon.pBase.GetPName}!");
+            yield return new WaitForSeconds(1f);
+            
+            StartCoroutine(ExcecuteEnemyMove());        // turno del enemigo después de hacer un cambio
+        }
+
+
     }
 }
