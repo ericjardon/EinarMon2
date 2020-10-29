@@ -88,11 +88,13 @@ public class LearnableMove
 
 public enum PKMNType
 {
-    NoType,
+    Basic,
+    Human,
+    Magic,
     Mecha,
     Demon,
-    Normal,
-    Fire,
-    Grass,
-    Water
+    Troll,
+    Elf,
+    Beast,
+    Divine
 }

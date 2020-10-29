@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00e98ff64b149d439f1cd0356e04780, type: 3}
   m_Name: Blubot
   m_EditorClassIdentifier: 
-  pkmnName: 
-  description: 
+  pkmnName: Blubot
+  description: A cube shaped robot created a long time ago. It has incredible durability
+    and strength for its small size.
   front: {fileID: 21300000, guid: 11d5334abb7f61b42b70afecf89cfc65, type: 3}
   back: {fileID: 21300000, guid: 11d5334abb7f61b42b70afecf89cfc65, type: 3}
-  type: 1
+  type: 3
   maxHP: 50
   attack: 10
   defense: 30
