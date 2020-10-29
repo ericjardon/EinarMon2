@@ -7,7 +7,8 @@ public class AreaPokemons : MonoBehaviour
     [SerializeField] List<Pokemon> wildPokemon;
 
     public Pokemon GetRandomPkmn(){
-        var wildP = wildPokemon [Random.Range(0, wildPokemon.Count)];
+        print(UnityEngine.Random.Range(0,wildPokemon.Count));
+        var wildP = wildPokemon[UnityEngine.Random.Range(0,wildPokemon.Count)];
         wildP.Init();
         return wildP;
     }

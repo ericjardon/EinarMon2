@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     public LayerMask tallGrassLayer;
     public LayerMask interactableLayer;
 
-    public event Action OnStartBattle;
+    public event Action<bool> OnStartBattle;        // emite un evento que escucha GameManager para iniciar pelea, indica si rival o salvaje
 
     void Awake(){           
         // Awake se llama cuando un GameObject es inicializado,
@@ -93,7 +93,6 @@ public class Player : MonoBehaviour
         if (Physics2D.OverlapCircle(newPosition, 0.1f, solidObjectsLayer | interactableLayer) != null){
             // si no es null, significa que el espacio está ocupado
             // entonces no podemos avanzar y regresamos false
-            Debug.Log("Solid Object Detected");
             return false;
         }
         return true;
@@ -105,7 +104,8 @@ public class Player : MonoBehaviour
 
             if (UnityEngine.Random.Range(0.0f,100.0f) <= 10.0){     // 10% de probabilidad de salir un pokemón salvaje
                 animator.SetBool("isMoving", false);        // para que deje de animarse durante una batalla
-                OnStartBattle();        // emite un evento para ser escuchado por GameManager
+                OnStartBattle(true);        // emite un evento para ser escuchado por GameManager. 
+                // True porque es Wild Encounter
             }
         }
     }

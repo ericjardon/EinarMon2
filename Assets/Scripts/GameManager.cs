@@ -36,15 +36,15 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void Battle() {
-        state = GameState.Battling;
-        battleSystem.gameObject.SetActive(true);    // activamos la vista de modo pelea
-        mapCamera.gameObject.SetActive(false);      // desactivamos la vista el terreno
-
-        var Team = playerController.GetComponent<Team>();
-        var enemyP = FindObjectOfType<AreaPokemons>().GetRandomPkmn();
-        battleSystem.StartBattle(Team, enemyP);
-
+    void Battle(bool wildEncounter) {
+        if (wildEncounter){
+            state = GameState.Battling;
+            battleSystem.gameObject.SetActive(true);    // activamos la vista de modo pelea
+            mapCamera.gameObject.SetActive(false);      // desactivamos la vista el terreno
+            var Team = playerController.GetComponent<Team>();
+            var enemyP = FindObjectOfType<AreaPokemons>().GetRandomPkmn();
+            battleSystem.StartBattle(Team, enemyP);
+        }
     }
 
     void EndBattle(bool playerWon) {

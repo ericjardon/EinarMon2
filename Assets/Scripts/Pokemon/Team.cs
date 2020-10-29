@@ -9,7 +9,7 @@ public class Team : MonoBehaviour
     [SerializeField] List <Pokemon> pokemons;
 
     public List<Pokemon> Pokemons {
-        // Property de C#, en lugar de crear un método Get() explícito, solo llamamos .Pokemons y nos devuelve pokemons.
+        // Property de C#, en lugar de crear un método Get() explícito, solo llamamos Team.Pokemons y nos devuelve pokemons.
         get {
             return pokemons;
         }
@@ -18,13 +18,13 @@ public class Team : MonoBehaviour
     private void Start(){
         foreach (var p in pokemons)
         {
-            // Initialize all the wild pokemons
+            // Initialize all pokemons: set HP, moves, level
             p.Init();
         }
     }
     
     public Pokemon GetAlivePokemon(){
-        // We are using the link dependency to get the HP and determine what pokemons are alive
+        // We are using the system.linq dependency to query the first pokemons who is not fainted
         return pokemons.Where(x => x.HP > 0).FirstOrDefault();
         
     }

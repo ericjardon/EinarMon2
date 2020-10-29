@@ -8,6 +8,7 @@ public class MemberHUD : MonoBehaviour
     [SerializeField] Text nameText;
     [SerializeField] Text levelText;
     [SerializeField] HPBar HPBar;
+    [SerializeField] Color highlightColor;
 
     Pokemon pkmn;
 
@@ -17,6 +18,14 @@ public class MemberHUD : MonoBehaviour
         nameText.text = pokemon.pBase.GetPName;
         levelText.text = "Lvl" + pokemon.pLvl;
         HPBar.SetHP((float) pokemon.HP / pokemon.MaxHP);
+    }
+
+    public void HighlightName(bool isSelected){
+        if (isSelected){
+            nameText.color = highlightColor; 
+        } else {
+            nameText.color = Color.black;
+        }
     }
 
 }

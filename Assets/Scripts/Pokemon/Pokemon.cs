@@ -22,12 +22,10 @@ public class Pokemon
     public int HP {get; set;}
     public List<Move> Moves {get; set;}     // esa sintaxis crea la propiedad y añade metodos get y set en una sola línea
 
-    // We change the constructor to this new function Init() who is the one that initializes a Pokemon.
-    public void Init(){
-        
+    // Instead of a Constructor we have an Init function: sets HP, Moves, according to level
+    public void Init(){        
         this.HP = MaxHP;
 
-        // recién creado no tiene movimientos.
         this.Moves = new List<Move>();   // dependiendo del nivel agregamos movimientos de la lista de learnableMoves
 
         foreach (var move in pBase.GetLearnableMoves()) {

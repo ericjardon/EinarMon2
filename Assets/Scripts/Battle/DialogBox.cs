@@ -63,7 +63,7 @@ public class DialogBox : MonoBehaviour
         }
     }
 
-    public void NameMoves(List<Move> moves){
+    public void SetMoveNames(List<Move> moves){
         for(int i=0; i<moveTxt.Count; ++i){
             if(i<moves.Count){
                 moveTxt[i].text= moves[i].Base.GetMoveName();

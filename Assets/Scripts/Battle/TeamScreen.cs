@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class TeamScreen : MonoBehaviour
 {
-    [SerializeField] Text infoText;
+    [SerializeField] Text infoText;     // text shown to user
+    MemberHUD[] members;        // array of HUDs in screen
+    List<Pokemon> pkmns;
 
-    MemberHUD[] members;
 
     public void Init(){
         // En lugar de hacer Serialize Field con los miembros y añadir manualmente desde el inspector,
@@ -15,9 +16,10 @@ public class TeamScreen : MonoBehaviour
         members = GetComponentsInChildren<MemberHUD>();
     }
 
-    // Esta función jala la información de los pokemon en el Team del jugador.
-    // Solo mostrará la información de los pokemon con los que se cuenta, incluso si son menos de 6
     public void SetTeamData(List<Pokemon> pkmns){
+        // Esta función jala la información de los pokemon existentes en el Team del jugador
+        this.pkmns = pkmns;
+
         for (int i = 0; i < members.Length; i++)
         {
             if (i < pkmns.Count){
@@ -27,5 +29,22 @@ public class TeamScreen : MonoBehaviour
             }
         }
         infoText.text = "Choose your fighter!";
+    }
+
+    public void UpdateTS(int selected){
+        // Highlight with a color the name of current Selected Member
+        for (int i = 0; i < pkmns.Count; i++)
+        {
+            if (i==selected){
+                // highlight hud name
+                members[i].HighlightName(true);
+            } else {
+                members[i].HighlightName(false);
+            }
+        }
+    }
+
+    public void SetInfoText(string text){
+        infoText.text = text;
     }
 }

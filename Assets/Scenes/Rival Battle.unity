@@ -12614,8 +12614,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerU: {fileID: 1740190764}
-  playerH: {fileID: 787130746}
   enemyU: {fileID: 971639540}
+  playerH: {fileID: 787130746}
   enemyH: {fileID: 983102513}
   dialogB: {fileID: 392616248}
   teamScreen: {fileID: 22277037}
