@@ -20,6 +20,5 @@ public class BattleUnit : MonoBehaviour
         else
         // debería aquí correr la animación de ENTRADA de un sprite de rival
             GetComponent<Image>().sprite= pkmn.pBase.GetFront;
-        
     }
 }

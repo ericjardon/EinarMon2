@@ -14,7 +14,7 @@ public class Team : MonoBehaviour
             return pokemons;
         }
     }
-
+    
     private void Start(){
         foreach (var p in pokemons)
         {
@@ -25,7 +25,7 @@ public class Team : MonoBehaviour
     
     public Pokemon GetAlivePokemon(){
         // We are using the system.linq dependency to query the first pokemons who is not fainted
-        return pokemons.Where(x => x.HP > 0).FirstOrDefault();
-        
+        return pokemons.Where(x => x.HP > 0).FirstOrDefault();  
+        // if no more pokemons alive, returns null
     }
 }
