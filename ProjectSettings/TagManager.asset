@@ -16,7 +16,7 @@ TagManager:
   - SolidObjects
   - TallGrass
   - Interactable
-  - 
+  - PerspectiveStr
   - 
   - 
   - 
@@ -49,4 +49,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3721969883
+    locked: 0
+  - name: Perspective
+    uniqueID: 722040977
     locked: 0
