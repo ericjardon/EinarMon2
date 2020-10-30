@@ -24,7 +24,7 @@ public class BattleSystem : MonoBehaviour
 
     public event Action<bool> OnDefeat;         // Emite un evento al terminar batalla que indica quién perdió
     BattleState state;
-    bool isTrainerBattle=false;         // para distinguir wild pokemon de Rival Battle
+    bool isTrainerBattle;         // para distinguir wild pokemon de Rival Battle
 
     // índices de selección. En C#, value de un int es 0 por default
     int currentAction;
@@ -34,12 +34,19 @@ public class BattleSystem : MonoBehaviour
     // Objetos específicos a la batalla
     Team playerTeam;
     Pokemon enemyP;
-
+    Team enemyTeam;
 
     public void StartBattle(Team playerTeam, Pokemon enemyP){
+        isTrainerBattle = false;
         this.playerTeam = playerTeam;
         this.enemyP = enemyP;
         StartCoroutine(SetupBattle());
+    }
+    public void StartDuel(Team playerTeam, Team enemyTeam){
+        isTrainerBattle = true;
+        this.playerTeam = playerTeam;
+        this.enemyTeam = enemyTeam;
+        StartCoroutine(SetupDuel());
     }
 
     public void HandleUpdate(){
@@ -68,7 +75,19 @@ public class BattleSystem : MonoBehaviour
         yield return dialogB.TD($"A wild {enemyU.pkmn.pBase.GetPName} appeared");   
         yield return new WaitForSeconds(1f);    // hardcodeamos 1 segundo para dar tiempo de lectura 
         // resumimos ejecución de SetupBattle
+        PlayerAction();
+    }
 
+    public IEnumerator SetupDuel(){
+        playerU.Setup(playerTeam.GetAlivePokemon());
+        enemyU.Setup(enemyTeam.GetAlivePokemon());
+        playerH.SetData(playerU.pkmn);
+        enemyH.SetData(enemyTeam.GetAlivePokemon());
+        teamScreen.Init();
+
+        dialogB.SetMoveNames(playerU.pkmn.Moves); 
+        yield return dialogB.TD($"Rival Bakortega has challenged you to battle");   
+        yield return new WaitForSeconds(1f);   
         PlayerAction();
     }
 
@@ -84,14 +103,45 @@ public class BattleSystem : MonoBehaviour
         if (isDefeated){
             yield return dialogB.TD($"{enemyU.pkmn.pBase.GetPName} was defeated");
             // aquí llamaríamos a la animación
-
             yield return new WaitForSeconds(2f);
-            OnDefeat(true);     // jugador ganó la pelea
-
-        }else{
+            OnDefeat(true);
+        }
+        else{
             StartCoroutine(ExcecuteEnemyMove());
         }
     }
+
+    IEnumerator ExcecutePlayerMoveDuel(){
+        Debug.Log("Execute player move duel");
+        state = BattleState.Busy;
+        var move =playerU.pkmn.Moves[currentMove];
+        move.PP --; // reducir el PP del movimiento y actualizar en HUD
+        yield return dialogB.TD($"{playerU.pkmn.pBase.GetPName} used {move.Base.GetMoveName()}");
+        yield return new WaitForSeconds(1f);
+        bool isDefeated =enemyU.pkmn.DealDamage(move, playerU.pkmn);
+
+        yield return enemyH.AffectHP();
+        if (isDefeated){
+            Debug.Log("Rival pokemon defeated.");
+            yield return dialogB.TD($"{enemyU.pkmn.pBase.GetPName} was defeated");
+            // aquí llamaríamos a la animación
+            yield return new WaitForSeconds(2f);
+
+            if (enemyTeam.GetAlivePokemon() != null){
+                Debug.Log("Sending out rival pokemon");
+                // El jugador puede escoger el siguiente pokemon a sacar
+                state = BattleState.Busy;
+                StartCoroutine(SwitchRivalPkmn(enemyTeam.GetAlivePokemon()));
+            }else{
+                enemyTeam.gameObject.GetComponent<Trainer>().isDefeated();
+                OnDefeat(true);     // jugador ganó la pelea
+            }
+        }
+        else{
+            StartCoroutine(ExcecuteEnemyMove());
+        }
+    }
+
 
     IEnumerator ExcecuteEnemyMove(){
         state = BattleState.EnemyMove;
@@ -104,6 +154,7 @@ public class BattleSystem : MonoBehaviour
         bool isDefeated =playerU.pkmn.DealDamage(move, enemyU.pkmn);
 
         yield return playerH.AffectHP();
+
         if (isDefeated){
             yield return dialogB.TD($"{playerU.pkmn.pBase.GetPName} was defeated");
 
@@ -115,7 +166,6 @@ public class BattleSystem : MonoBehaviour
             if (NextAlivePokemon != null){
                 // El jugador puede escoger el siguiente pokemon a sacar
                 ViewTeamScreen();
-
             }else{
                 OnDefeat(false);     // si no quedan pokemon vivos, el jugador pierde la pelea
             }    
@@ -168,7 +218,11 @@ public class BattleSystem : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Return)){
             dialogB.ShowMS(false);
             dialogB.ShowDT(true);
-            StartCoroutine(ExcecutePlayerMove());
+            if (isTrainerBattle){
+                StartCoroutine(ExcecutePlayerMoveDuel());
+            } else {
+                StartCoroutine(ExcecutePlayerMove());
+            }
         }
         if (Input.GetKeyDown(KeyCode.Backspace)){
             dialogB.ShowMS(false);
@@ -224,7 +278,6 @@ public class BattleSystem : MonoBehaviour
         } else if (Input.GetKeyDown(KeyCode.UpArrow)){
             currentMember -= 2;
         }
-        print("Current selection: " + currentMember);
 
         currentMember = Mathf.Clamp(currentMember, 0, playerTeam.Pokemons.Count - 1);
         teamScreen.UpdateTS(currentMember);
@@ -252,25 +305,35 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(SwitchPokemon(selected));
 
         }
+    }
 
-        IEnumerator SwitchPokemon(Pokemon nextPokemon){
-            if (playerU.pkmn.HP > 0){
-                // Es un switch voluntario, pokemon actual sigue vivo
-                yield return dialogB.TD($"Enough, {playerU.pkmn.pBase.GetPName}");
-                // TODO: AQUÍ IRÍA ANIMACIÓN DE SALIDA
-                yield return new WaitForSeconds(1f);
-            }
-
-            playerU.Setup(nextPokemon); 
-            playerH.SetData(nextPokemon);
-            dialogB.SetMoveNames(nextPokemon.Moves); 
-
-            yield return dialogB.TD($"Attack, {nextPokemon.pBase.GetPName}!");
+    IEnumerator SwitchPokemon(Pokemon nextPokemon){
+        if (playerU.pkmn.HP > 0){
+            // Es un switch voluntario, pokemon actual sigue vivo
+            yield return dialogB.TD($"Enough, {playerU.pkmn.pBase.GetPName}");
+            // TODO: AQUÍ IRÍA ANIMACIÓN DE SALIDA
             yield return new WaitForSeconds(1f);
-            
-            StartCoroutine(ExcecuteEnemyMove());        // turno del enemigo después de hacer un cambio
         }
 
+        playerU.Setup(nextPokemon); 
+        playerH.SetData(nextPokemon);
+        dialogB.SetMoveNames(nextPokemon.Moves); 
 
+        yield return dialogB.TD($"Attack, {nextPokemon.pBase.GetPName}!");
+        yield return new WaitForSeconds(1f);
+        
+        StartCoroutine(ExcecuteEnemyMove());        // turno del enemigo después de hacer un cambio
     }
+
+    IEnumerator SwitchRivalPkmn(Pokemon nextPokemon){
+        Debug.Log("Switching Rival pkmn");
+        enemyU.Setup(nextPokemon); 
+        enemyH.SetData(nextPokemon);
+
+        yield return dialogB.TD("Rival: you still haven't defeated me!");
+        yield return new WaitForSeconds(1f);
+        
+        PlayerAction();        // turno del jugador después de derrotar pokemon rival
+    }
+
 }

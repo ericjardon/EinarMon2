@@ -8894,6 +8894,7 @@ GameObject:
   - component: {fileID: 481182695}
   - component: {fileID: 481182694}
   - component: {fileID: 481182696}
+  - component: {fileID: 481182697}
   m_Layer: 10
   m_Name: Rival
   m_TagString: Untagged
@@ -9028,6 +9029,27 @@ MonoBehaviour:
   dialog:
     lines:
     - I see you want to fight. Let's do this.
+  defeatDialog:
+    lines:
+    - Well...
+    - You won. Nice. What more do you want?
+--- !u!114 &481182697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481182691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e8338a6fb9bca43b68d6f9d6b06e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pokemons:
+  - _base: {fileID: 11400000, guid: 069ace5eb8452e64188b99b64815982a, type: 2}
+    level: 5
+  - _base: {fileID: 11400000, guid: 1f83cb8320abc874fbed8a795a639f84, type: 2}
+    level: 10
 --- !u!1 &484541669
 GameObject:
   m_ObjectHideFlags: 0
@@ -10253,6 +10275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 2072135696}
   battleSystem: {fileID: 2035290941}
+  rival: {fileID: 481182696}
   mapCamera: {fileID: 1972660553}
 --- !u!4 &988092900
 Transform:

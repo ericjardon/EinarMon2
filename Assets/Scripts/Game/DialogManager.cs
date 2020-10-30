@@ -11,7 +11,7 @@ public class DialogManager : MonoBehaviour
     [SerializeField] int lettersPS;
 
     public event Action OnStartDialog;
-    public event Action OnEndDialog;
+    public event Action<bool> OnEndDialog;
 
     // Singleton paradigm: de esta forma muchos otros script pueden llamar al DialogManager.
     // Solo hay un dialogmanager para todo el juego
@@ -20,15 +20,16 @@ public class DialogManager : MonoBehaviour
     int currLine = 0;
     DialogLines theDialog;
     bool isTalking;
+    bool triggerBattle;
 
     public void Awake() {
         // se llama antes de Start. Asignamos a la variable estática esta única instancia.
         Instance = this;
     }
 
-    public IEnumerator DisplayDialog(DialogLines dialog){
+    public IEnumerator DisplayDialog(DialogLines dialog, bool triggerBattle){
         // takes in a listof string to show sequencially in the dialog Box
-
+        this.triggerBattle = triggerBattle;
         yield return new WaitForEndOfFrame();       
         // pausar y esperar 1 frame para no generar errores con HandleUpdate,
         // ya que el usuario está presionando la tecla Espacio en el mismo frame
@@ -40,6 +41,7 @@ public class DialogManager : MonoBehaviour
 
         dialogBox.SetActive(true);
         StartCoroutine(GenerateText(dialog.Lines[0]));
+
     }
 
     public IEnumerator GenerateText(string line){
@@ -50,7 +52,6 @@ public class DialogManager : MonoBehaviour
             dialogText.text+=letter;
             yield return new WaitForSeconds(1f/lettersPS);
         }
-
         isTalking = false;
     }
 
@@ -65,7 +66,7 @@ public class DialogManager : MonoBehaviour
             else {
                 currLine = 0;       // reiniciar índice de línea de diálogo
                 dialogBox.SetActive(false);     // Dejar de mostrar el dialogBox
-                OnEndDialog?.Invoke();      // emitir evento OnEndDialog al GameManager
+                OnEndDialog(triggerBattle);      // emitir evento OnEndDialog al GameManager
             }
         }
     }

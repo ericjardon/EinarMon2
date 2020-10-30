@@ -14,26 +14,27 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Player playerController;
     [SerializeField] BattleSystem battleSystem;
+    [SerializeField] Trainer rival;
     [SerializeField] Camera mapCamera;
 
     void Start() {
         // Aquí indicamos a qué eventos emitidos por otras clases nos estamos suscribiendo
         // i.e. 'Escuchando'
-
         playerController.OnStartBattle += Battle;
+
         battleSystem.OnDefeat += EndBattle;
         DialogManager.Instance.OnStartDialog += () => {
             // si empieza un diálogo, cambiamos estado a chatting
             state = GameState.Chatting;
         };
-        DialogManager.Instance.OnEndDialog += () => {
+        DialogManager.Instance.OnEndDialog += (triggerBattle) => {
             if (state == GameState.Chatting){
                 state = GameState.Roaming;
+                if (triggerBattle)
+                    Battle(false);
             }
         };
-        
         // notación indica: cuando script emita evento, += corremos algo
-
     }
 
     void Battle(bool wildEncounter) {
@@ -44,6 +45,15 @@ public class GameManager : MonoBehaviour
             var Team = playerController.GetComponent<Team>();
             var enemyP = FindObjectOfType<AreaPokemons>().GetRandomPkmn();
             battleSystem.StartBattle(Team, enemyP);
+        }
+        else {
+            // batalla con rival
+            state = GameState.Battling;
+            battleSystem.gameObject.SetActive(true);
+            mapCamera.gameObject.SetActive(false);
+            var Team = playerController.GetComponent<Team>();
+            var enemyTeam = rival.GetComponent<Team>();
+            battleSystem.StartDuel(Team, enemyTeam);
         }
     }
 
@@ -66,5 +76,4 @@ public class GameManager : MonoBehaviour
             DialogManager.Instance.HandleUpdate();
         }
     }
-
 }
