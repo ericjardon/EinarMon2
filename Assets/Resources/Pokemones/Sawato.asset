@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00e98ff64b149d439f1cd0356e04780, type: 3}
+  m_Name: Sawato
+  m_EditorClassIdentifier: 
+  pkmnName: Sawato
+  description: A divine entity that lives in water.
+  front: {fileID: 21300000, guid: 2ceab6ba4fcd235498667f1f9d49344b, type: 3}
+  back: {fileID: 21300000, guid: 3391941c495bfed479f318b9ddb6ee42, type: 3}
+  type: 8
+  maxHP: 224
+  attack: 80
+  defense: 45
+  spAttack: 70
+  spDefense: 45
+  speed: 200
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: a0619d184cf278c479b37242fe9f191e, type: 2}
+    atLevel: 5
+  - moveBase: {fileID: 11400000, guid: 46a34ed3b8fe1224f80cee9d30bb7b49, type: 2}
+    atLevel: 5
+  - moveBase: {fileID: 11400000, guid: 087d92652c7243542ad05000e6d1b2a8, type: 2}
+    atLevel: 5

@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9df20f4cd0978f24ebedfabc6a781119, type: 3}
-  m_Name: MechaPunch
+  m_Name: Water Gun
   m_EditorClassIdentifier: 
-  moveName: MechaPunch
-  description: 'Burrito del copacabana
-
-'
-  type: 1
-  power: 100
-  accuracy: 50
-  pp: 20
+  moveName: Water Gun
+  description: no desc
+  type: 0
+  power: 170
+  accuracy: 100
+  pp: 25
