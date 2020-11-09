@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00e98ff64b149d439f1cd0356e04780, type: 3}
+  m_Name: Plantinho
+  m_EditorClassIdentifier: 
+  pkmnName: Plantinho
+  description: A descendant of the legendary Ent species. Is immune to magic.
+  front: {fileID: 21300000, guid: daba9a800ab078b46a40532684468170, type: 3}
+  back: {fileID: 21300000, guid: e9c3f9f26dfb17a408a6f1253587949a, type: 3}
+  type: 7
+  maxHP: 268
+  attack: 40
+  defense: 100
+  spAttack: 25
+  spDefense: 25
+  speed: 25
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 63153b7646651a644958f7ffb0240f12, type: 2}
+    atLevel: 5
+  - moveBase: {fileID: 11400000, guid: 087d92652c7243542ad05000e6d1b2a8, type: 2}
+    atLevel: 2
+  - moveBase: {fileID: 11400000, guid: 087d92652c7243542ad05000e6d1b2a8, type: 2}
+    atLevel: 2
+  - moveBase: {fileID: 11400000, guid: 087d92652c7243542ad05000e6d1b2a8, type: 2}
+    atLevel: 2

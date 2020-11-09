@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] BattleSystem battleSystem;
     [SerializeField] Trainer rival;
     [SerializeField] Camera mapCamera;
+    [SerializeField] GameObject InventoryUI;
 
     void Start() {
         // Aquí indicamos a qué eventos emitidos por otras clases nos estamos suscribiendo
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
         battleSystem.OnDefeat += EndBattle;
         DialogManager.Instance.OnStartDialog += () => {
             // si empieza un diálogo, cambiamos estado a chatting
+            InventoryUI.SetActive(false);
             state = GameState.Chatting;
         };
         DialogManager.Instance.OnEndDialog += (triggerBattle) => {
@@ -42,8 +44,11 @@ public class GameManager : MonoBehaviour
             state = GameState.Battling;
             battleSystem.gameObject.SetActive(true);    // activamos la vista de modo pelea
             mapCamera.gameObject.SetActive(false);      // desactivamos la vista el terreno
+            InventoryUI.SetActive(false);
+            
             var Team = playerController.GetComponent<Team>();
             var enemyP = FindObjectOfType<AreaPokemons>().GetRandomPkmn();
+            Debug.Log("Jaló team y enemy p correctamente");
             battleSystem.StartBattle(Team, enemyP);
         }
         else {
@@ -62,6 +67,7 @@ public class GameManager : MonoBehaviour
         state = GameState.Roaming;
         battleSystem.gameObject.SetActive(false);
         mapCamera.gameObject.SetActive(true);
+        InventoryUI.SetActive(true);
 
     }
 

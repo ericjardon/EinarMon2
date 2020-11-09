@@ -15,6 +15,6 @@ MonoBehaviour:
   moveName: Fireball
   description: Philadelphia quesadilla tatemada
   type: 2
-  power: 100
+  power: 70
   accuracy: 90
   pp: 10

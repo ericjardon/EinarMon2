@@ -13,7 +13,7 @@ public class SkyPotion : MonoBehaviour
 
      public void TeleportPlayerIsland(){
 
-     player.position= new Vector2(-54.51f,64.61f);
+     player.position= new Vector2(-39.50f,20.80f);
      Destroy(gameObject);      
 
      }
