@@ -28,4 +28,8 @@ public class Trainer : MonoBehaviour, Interactable
         notBattled = false;
     }
 
+    public void setBattled(bool notBattled){
+        this.notBattled = notBattled;
+    }
+
 }
