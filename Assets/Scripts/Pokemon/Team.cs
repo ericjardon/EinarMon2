@@ -28,4 +28,15 @@ public class Team : MonoBehaviour
         return pokemons.Where(x => x.HP > 0).FirstOrDefault();  
         // if no more pokemons alive, returns null
     }
+
+    public void ReceivePokemon(Pokemon pkmn){
+        Debug.Log("Player receiving Pokemon...");
+        if (pokemons.Count < 6){
+            pkmn.Init();
+            this.pokemons.Add(pkmn);
+        } else {
+            Debug.Log("Your Einarmon Team is full!");
+        }
+
+    }
 }
