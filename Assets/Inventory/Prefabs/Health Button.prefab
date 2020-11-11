@@ -121,7 +121,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: -1154495065341389232}
-        m_MethodName: TeleportPlayerStart
+        m_MethodName: RestorePokemon
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

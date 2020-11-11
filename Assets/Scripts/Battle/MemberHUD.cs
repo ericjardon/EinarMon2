@@ -20,6 +20,12 @@ public class MemberHUD : MonoBehaviour
         HPBar.SetHP((float) pokemon.HP / pokemon.MaxHP);
     }
 
+    public void SetEmpty(){
+        nameText.text = "---";
+        levelText.text = "-";
+        HPBar.SetHP((float) 0);
+    }
+
     public void HighlightName(bool isSelected){
         if (isSelected){
             nameText.color = highlightColor; 
