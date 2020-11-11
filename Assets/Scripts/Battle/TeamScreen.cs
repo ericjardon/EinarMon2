@@ -25,7 +25,8 @@ public class TeamScreen : MonoBehaviour
             if (i < pkmns.Count){
                 members[i].SetData(pkmns[i]);
             } else {
-                members[i].gameObject.SetActive(false);     // si se acaban los pokemon, deshabilitar el resto de las HUD
+                //members[i].gameObject.SetActive(false);     // si se acaban los pokemon, deshabilitar el resto de las HUD
+                members[i].SetEmpty();
             }
         }
         infoText.text = "Choose your fighter!";

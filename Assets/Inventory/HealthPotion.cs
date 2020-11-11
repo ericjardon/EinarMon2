@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class HealthPotion : MonoBehaviour
 {
-    private Transform player;
+    private GameObject player;
     // Start is called before the first frame update
     private void Start(){
     
-    player= GameObject.FindGameObjectWithTag("Player").transform;
+    player= GameObject.FindGameObjectWithTag("Player");
 }
 
-     public void TeleportPlayerStart(){
-
-     player.position= new Vector2(0,0);
-     Destroy(gameObject);      
-
+     public void RestorePokemon(){
+        player.GetComponent<Team>().Start();
+        Destroy(gameObject);   
      }
 }
 //Test

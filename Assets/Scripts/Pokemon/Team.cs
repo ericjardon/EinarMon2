@@ -15,7 +15,7 @@ public class Team : MonoBehaviour
         }
     }
     
-    private void Start(){
+    public void Start(){
         foreach (var p in pokemons)
         {
             // Initialize all pokemons: set HP, moves, level
