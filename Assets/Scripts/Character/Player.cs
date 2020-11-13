@@ -12,6 +12,11 @@ public class Player : MonoBehaviour
     public LayerMask solidObjectsLayer;
     public LayerMask tallGrassLayer;
     public LayerMask interactableLayer;
+    public int teamPkmn = 0;
+    // We use an identifier for the current player's pokemon Team.
+    // Initially it is 0. 
+    // When given a new pokemon, the id changes.
+    // The GameLoader saves this int and retrieves the Corresponding team from the TeamManager Object, and reassigns it to the Player
 
     public event Action<bool> OnStartBattle;        // emite un evento que escucha GameManager para iniciar pelea, indica si rival o salvaje
 
