@@ -25,7 +25,6 @@ public class PokemonBase : ScriptableObject
     [SerializeField] int speed;
     [SerializeField] List<LearnableMove> learnableMoves;
 
-
     public string GetPName {
         get { return pkmnName; }
     }

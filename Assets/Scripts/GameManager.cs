@@ -6,23 +6,24 @@ public enum GameState {
     Roaming,
     Battling,
     Chatting,
+    Menu,
 }
 
 public class GameManager : MonoBehaviour
 {
-    GameState state;
+    public GameState state;
 
     [SerializeField] Player playerController;
     [SerializeField] BattleSystem battleSystem;
     [SerializeField] Trainer rival;
     [SerializeField] Camera mapCamera;
     [SerializeField] GameObject InventoryUI;
+    [SerializeField] StartMenu Menu;
 
     void Start() {
         // Aquí indicamos a qué eventos emitidos por otras clases nos estamos suscribiendo
         // i.e. 'Escuchando'
         playerController.OnStartBattle += Battle;
-
         battleSystem.OnDefeat += EndBattle;
         DialogManager.Instance.OnStartDialog += () => {
             // si empieza un diálogo, cambiamos estado a chatting
@@ -36,7 +37,7 @@ public class GameManager : MonoBehaviour
                     Battle(false);
             }
         };
-        // notación indica: cuando script emita evento, += corremos algo
+
     }
 
     void Battle(bool wildEncounter) {
@@ -72,14 +73,23 @@ public class GameManager : MonoBehaviour
     }
 
     void Update() {
+        Debug.Log("El estado pendejo es " + this.state);
+
         if (state == GameState.Roaming){
+            Menu.gameObject.SetActive(false);
             playerController.HandleUpdate();
         }
         else if (state == GameState.Battling){
+            Menu.gameObject.SetActive(false);
             battleSystem.HandleUpdate();
         }
         else if (state == GameState.Chatting){
+            Menu.gameObject.SetActive(false);
             DialogManager.Instance.HandleUpdate();
+        }   
+        else if (state == GameState.Menu){
+            InventoryUI.SetActive(false);           // desactivamos inventory UI
         }
     }
+
 }

@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Start Menu.unity
+    guid: 47e9f19473ed9e64d95b2617441521b2
+  - enabled: 1
+    path: Assets/Scenes/Rival Battle.unity
+    guid: bea4b339557fb7d44a4f3724e81b5dd9
   m_configObjects: {}
