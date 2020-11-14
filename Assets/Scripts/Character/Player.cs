@@ -12,7 +12,8 @@ public class Player : MonoBehaviour
     public LayerMask solidObjectsLayer;
     public LayerMask tallGrassLayer;
     public LayerMask interactableLayer;
-    public int teamPkmn = 0;
+    public int teamId = -1;
+    public Team playerTeam;
     // We use an identifier for the current player's pokemon Team.
     // Initially it is 0. 
     // When given a new pokemon, the id changes.
@@ -125,7 +126,14 @@ public class Player : MonoBehaviour
             detector.GetComponent<Interactable>()?.Interact();
             // ?. is the null conditional operator. Only if the first operand is not null,
             // run the next function. That is, only if there is actually an interactable class.
-            // this way the game doesn't crach if there is not an interctable class present
+            // this way the game doesn't crash if there is not an interctable class present
         }
+    }
+
+    public void LoadTeam(){
+        // checa la id del Team, dependiendo de la id carga al Team el Team de Team Manager que corresponda.
+        var manager = GameObject.FindWithTag("GameController");
+        playerTeam.Pokemons =  manager.GetComponent<TeamManager>().getTeamPokemons(teamId);
+        playerTeam.Start();     // inicializar los nuevos pokemones
     }
 }

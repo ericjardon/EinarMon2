@@ -73,7 +73,6 @@ public class GameManager : MonoBehaviour
     }
 
     void Update() {
-        Debug.Log("El estado pendejo es " + this.state);
 
         if (state == GameState.Roaming){
             Menu.gameObject.SetActive(false);

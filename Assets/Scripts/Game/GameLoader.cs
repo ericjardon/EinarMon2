@@ -6,25 +6,17 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
 [System.Serializable]
-public struct Einarmon {
-    // un esquema que abstrae lo esencial del makerBlock: su posición e id.
-    public int id;
-
-    public Einarmon(int id) {
-        this.id = id;
-    }
-}
-
-[System.Serializable]
-public struct PlayerPos {
+public struct PlayerLog {
     public float x;
     public float y;
     public float z;
+    public int id;
 
-    public PlayerPos(float x, float y, float z){
+    public PlayerLog(float x, float y, float z, int teamId){
         this.x = x;
         this.y = y;
         this.z = z;
+        this.id = teamId;
     }
 }
 
@@ -35,24 +27,20 @@ public class GameLoader : MonoBehaviour
     public string path = @"C:\Users\ericj\Documents\Unity\SavedGames\MyGame.bin";     
     // TODO: accesible on Save pero no on LOAD
     
-    public Transform playerPosition;    
-
-    public int playerTeam;
-    
-    
-    public void Save() {
+    public void Save(){
         Vector3 pos = GameObject.FindWithTag("Player").transform.position;     // guarda posición actual de player
         
-        //playerPokemons = FindWithTag("Player").GetComponent<Team>();
+        var player = GameObject.FindWithTag("Player");
+        int id = player.GetComponent<Player>().teamId;
 
-        PlayerPos position = new PlayerPos(pos.x, pos.y, pos.z);
+        PlayerLog plog = new PlayerLog(pos.x, pos.y, pos.z, id);
         
         IFormatter formatter = new BinaryFormatter();
         Stream stream = new FileStream(path, 
                                         FileMode.Create,  
                                         FileAccess.Write, 
                                         FileShare.None);
-        formatter.Serialize(stream, position);
+        formatter.Serialize(stream, plog);
         stream.Close();
         // se guardan los datos en un archivo
     }
@@ -65,11 +53,16 @@ public class GameLoader : MonoBehaviour
                                         FileAccess.Read, 
                                         FileShare.Read);
         
-        var savedPos = (PlayerPos)formatter.Deserialize(stream);
+        var savedLog = (PlayerLog)formatter.Deserialize(stream);
         stream.Close();
         // cargar el archivo y leer los objetos de tipo Block que contiene
-        GameObject player = GameObject.FindWithTag("Player");
-        player.transform.position = new Vector3(savedPos.x, savedPos.y, savedPos.z);
+        
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        Player player = playerObj.GetComponent<Player>();
+        
+        playerObj.transform.position = new Vector3(savedLog.x, savedLog.y, savedLog.z);
+        player.teamId =savedLog.id;
+        player.LoadTeam();
         
         // instantiate the prefab indicated by the Block object's id
 
