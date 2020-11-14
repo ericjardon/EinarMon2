@@ -13,6 +13,10 @@ public class Team : MonoBehaviour
         get {
             return pokemons;
         }
+        set {
+            pokemons = value;
+        }
+        // poner un setter
     }
     
     public void Start(){
@@ -30,6 +34,13 @@ public class Team : MonoBehaviour
     }
 
     public void ReceivePokemon(Pokemon pkmn){
+        
+        int newId = gameObject.GetComponent<Player>().teamId + 1;
+        Debug.Log(newId + ", past Id" + gameObject.GetComponent<Player>().teamId);
+        gameObject.GetComponent<Player>().teamId = newId;
+
+        Debug.Log("Changing Team Id:" + gameObject.GetComponent<Player>().teamId);
+
         Debug.Log("Player receiving Pokemon...");
         if (pokemons.Count < 6){
             pkmn.Init();

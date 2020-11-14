@@ -9,9 +9,9 @@ public class TeamManager : MonoBehaviour
     void Start(){
         seeTeam(0);
     }
-    public Team getTeam(int id){
+    public List<Pokemon> getTeamPokemons(int id){
         // returns the list of pokemons according to id
-        return teams[id];
+        return teams[id].Pokemons;
     }
 
     public void seeTeam(int id){
