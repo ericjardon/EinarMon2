@@ -63,6 +63,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetRival(Trainer rival){
+        this.rival = rival;
+    }
+
     void EndBattle(bool playerWon) {
         // cambiamos el estado, desactivamos BattleSystem, activamos camara principal
         state = GameState.Roaming;

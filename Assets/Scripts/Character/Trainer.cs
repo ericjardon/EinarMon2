@@ -9,27 +9,28 @@ public class Trainer : MonoBehaviour, Interactable
     [SerializeField] DialogLines dialog;     // lo especificamos desde el Editor de Unity
     [SerializeField] DialogLines defeatDialog;
     public event Action<bool> OnStartBattle;
-    private bool notBattled = true;
+    public int trainerId;
+    public bool defeated = false;
 
     public void Interact() {
         // this class implements the abstract method Interact
-        // dialog box en el mapa: frase que empieza batalla
-        if (notBattled){
+        if (!defeated){
+            GameObject.FindWithTag("GameController").GetComponent<GameManager>().SetRival(this);
             StartCoroutine(DialogManager.Instance.DisplayDialog(dialog, true));
             // will trigger fight
         }
         else {
             StartCoroutine(DialogManager.Instance.DisplayDialog(defeatDialog, false));
-            // will not trigger fight
+            // if defeated, he will not trigger fight
         }
     }
 
     public void isDefeated() {
-        notBattled = false;
+        defeated = true;
     }
 
-    public void setBattled(bool notBattled){
-        this.notBattled = notBattled;
+    public void setDefeated(bool defeated){
+        this.defeated = defeated;
     }
 
 }
