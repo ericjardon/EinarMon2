@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public LayerMask solidObjectsLayer;
     public LayerMask tallGrassLayer;
     public LayerMask interactableLayer;
-    public int teamId = -1;
+    public int teamId;
     public Team playerTeam;
     // We use an identifier for the current player's pokemon Team.
     // Initially it is 0. 

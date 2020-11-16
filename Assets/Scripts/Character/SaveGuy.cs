@@ -9,7 +9,6 @@ public class SaveGuy : MonoBehaviour, Interactable
     public void Interact(){
         
         StartCoroutine(DialogManager.Instance.DisplayDialog(dialog, false));
-        Debug.Log("Hablaste con SaveGay");
         FindObjectOfType<GameLoader>().Save();
    }
     

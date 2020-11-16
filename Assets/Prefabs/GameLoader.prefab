@@ -43,5 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c836e4ee088c14408fd8f33ba415e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 0}
   path: C:\Users\ericj\Documents\Unity\SavedGames\MyGame.bin
+  numOfTrainers: 2
+  tmanager: {fileID: 5828143318943438069, guid: 964c67fda48bd9b42a2f73eb6022d73d,
+    type: 3}
