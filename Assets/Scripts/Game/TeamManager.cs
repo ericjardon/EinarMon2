@@ -18,7 +18,7 @@ public class TeamManager : MonoBehaviour
     }
 
     void Start(){
-        seeTeam(0);
+        // seeTeam(0);
     }
     public List<Pokemon> getTeamPokemons(int id){
         // returns the list of pokemons according to id
@@ -34,6 +34,7 @@ public class TeamManager : MonoBehaviour
     public void SetTrainers(bool[] trainersDefeated){
         // la idea es que reciba trainers defeated por parte del GameLoader cuando éste lo llame.
         // trainersDefeated y trainers deben tener misma longitud e índices correspondientes.
+        Debug.Log("Setting trainers bools...");
         for (int i = 0; i < trainers.Count; i++)
         {
             trainers[i].setDefeated(trainersDefeated[i]);

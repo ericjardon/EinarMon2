@@ -27,8 +27,18 @@ public class GameLoader : MonoBehaviour
 {
     //public TeamManager tm;      // set the object from the inspector
     public string path = @"C:\Users\ericj\Documents\Unity\SavedGames\MyGame.bin";
-    public int numOfTrainers = 2;
+    public int numOfTrainers;
+    private TeamManager tmanager;
+    
+    
+    void Start(){
+        tmanager = GameObject.FindWithTag("GameController").GetComponent<TeamManager>();
 
+        // For debugging:
+        int firstid = tmanager.Trainers[0].trainerId;
+        bool firstbool = tmanager.Trainers[0].defeated;
+        Debug.Log("First trainer: " + firstid + "  "+ firstbool);
+    }
 
     public void Save(){
         Vector3 pos = GameObject.FindWithTag("Player").transform.position;     // guarda posición actual de player
@@ -36,19 +46,22 @@ public class GameLoader : MonoBehaviour
         var player = GameObject.FindWithTag("Player");
         int id = player.GetComponent<Player>().teamId;
         
-        TeamManager tm = GameObject.FindWithTag("GameController").GetComponent<TeamManager>();
+        //TeamManager tm = GameObject.FindWithTag("GameController").GetComponent<TeamManager>();
 
         bool[] trainersDefeated = new bool[numOfTrainers];        // will iterate ofer TeamManager's trainers array and check their defeated value, save it to an array
-        Debug.Log("Trainers in TM = " + tm.Trainers.Count);
-        for (int i = 0; i < numOfTrainers; i++)
+        
+        Debug.Log("TM's Trainers count = " + tmanager.Trainers.Count);
+        
+        for (int i = 0; i < tmanager.Trainers.Count; i++)
         {
-            trainersDefeated[i] = tm.Trainers[i].defeated;
+            Debug.Log("Cycle: " + i + " defeated:" + tmanager.Trainers[i]);
+            trainersDefeated[i] = tmanager.Trainers[i].defeated;
         }
-
 
         PlayerLog plog = new PlayerLog(pos.x, pos.y, pos.z, id, trainersDefeated);
         
         IFormatter formatter = new BinaryFormatter();
+        Debug.Log("Now Saving...");
         Stream stream = new FileStream(path, 
                                         FileMode.Create,  
                                         FileAccess.Write, 
@@ -76,7 +89,17 @@ public class GameLoader : MonoBehaviour
         playerObj.transform.position = new Vector3(savedLog.x, savedLog.y, savedLog.z);
         player.teamId =savedLog.id;
         player.LoadTeam();
- 
+
+        bool[] savedTrainers = savedLog.trainersDefeated;
+
+        Debug.Log(savedTrainers.Length);
+        for (int i = 0; i < savedTrainers.Length; i++)
+        {
+            Debug.Log("Loading defeated val" + i + ", " + savedTrainers[i]);
+        }
+
+        Debug.Log("Setting Trainers...");
+        tmanager.SetTrainers(savedTrainers);
     }
 
 }
