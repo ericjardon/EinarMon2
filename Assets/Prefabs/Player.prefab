@@ -108,6 +108,8 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 1024
+  teamId: 0
+  playerTeam: {fileID: 0}
 --- !u!95 &3514565272958500330
 Animator:
   serializedVersion: 3
@@ -142,10 +144,6 @@ MonoBehaviour:
   pokemons:
   - _base: {fileID: 11400000, guid: 859f8767b9752b342bc98a3a52f76afa, type: 2}
     level: 20
-  - _base: {fileID: 11400000, guid: f49a83d05b34f50449893e11fd62f8dc, type: 2}
-    level: 10
-  - _base: {fileID: 11400000, guid: dce610d219b5e054a97dfd3e0a1d12f5, type: 2}
-    level: 5
 --- !u!1 &3514565273516021034
 GameObject:
   m_ObjectHideFlags: 0
