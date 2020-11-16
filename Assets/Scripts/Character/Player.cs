@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float speed =5;
-    private bool isMoving;
+    public bool isMoving;
     private Vector2 movement;
     private Animator animator;
     public LayerMask solidObjectsLayer;
