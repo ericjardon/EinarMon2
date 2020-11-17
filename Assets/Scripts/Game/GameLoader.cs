@@ -26,7 +26,8 @@ public struct PlayerLog {
 public class GameLoader : MonoBehaviour
 {
     //public TeamManager tm;      // set the object from the inspector
-    public string path = @"C:\Users\ericj\Documents\Unity\SavedGames\MyGame.bin";
+    //public string path = @"C:\Users\ericj\Documents\Unity\SavedGames\MyGame.bin";
+    private string path;
     public int numOfTrainers;
     private TeamManager tmanager;
     
@@ -34,6 +35,8 @@ public class GameLoader : MonoBehaviour
     void Start(){
         tmanager = GameObject.FindWithTag("GameController").GetComponent<TeamManager>();
 
+        string [] pathNames = {Application.persistentDataPath, "PlayerLog.bin"} ; //  %userprofile%\AppData\Local\Packages\<productname>\LocalState // Alexis\AppData\Local\Packages\EinarMon2\LocalState
+        path = Path.Combine(pathNames);
         // For debugging:
         int firstid = tmanager.Trainers[0].trainerId;
         bool firstbool = tmanager.Trainers[0].defeated;

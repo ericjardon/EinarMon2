@@ -1,0 +1,584 @@
+fileFormatVersion: 2
+guid: 2ff18240ddac73d49b1d428bff2aa0a7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6051854930703019790
+    second: Entrenadores pokemon_0
+  - first:
+      213: 5434720925547294560
+    second: Entrenadores pokemon_1
+  - first:
+      213: -95866249564254184
+    second: Entrenadores pokemon_2
+  - first:
+      213: -377684176707344597
+    second: Entrenadores pokemon_3
+  - first:
+      213: 9094023686623128452
+    second: Entrenadores pokemon_4
+  - first:
+      213: -2178531524555566949
+    second: Entrenadores pokemon_5
+  - first:
+      213: -6242342927647398515
+    second: Entrenadores pokemon_6
+  - first:
+      213: -876386856422348236
+    second: Entrenadores pokemon_7
+  - first:
+      213: 3312348526405182611
+    second: Entrenadores pokemon_8
+  - first:
+      213: 7700074456644407705
+    second: Entrenadores pokemon_9
+  - first:
+      213: -663502200003333073
+    second: Entrenadores pokemon_10
+  - first:
+      213: -3256151104816922717
+    second: Entrenadores pokemon_11
+  - first:
+      213: 7727719909469959418
+    second: Entrenadores pokemon_12
+  - first:
+      213: -2350011881145218030
+    second: Entrenadores pokemon_13
+  - first:
+      213: -3272390082287822405
+    second: Entrenadores pokemon_14
+  - first:
+      213: -6605424884235071775
+    second: Entrenadores pokemon_15
+  - first:
+      213: 778686560572362792
+    second: Entrenadores pokemon_16
+  - first:
+      213: 7668103742437663681
+    second: Entrenadores pokemon_17
+  - first:
+      213: 4579312833990202471
+    second: Entrenadores pokemon_18
+  - first:
+      213: 2701028413403659305
+    second: Entrenadores pokemon_19
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 128
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Entrenadores pokemon_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 432
+        width: 136
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f0104f210e730ca0800000000000000
+      internalID: -6051854930703019790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entrenadores pokemon_1
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 432
+        width: 136
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06fe0ac23e10c6b40800000000000000
+      internalID: 5434720925547294560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entrenadores pokemon_2
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 432
+        width: 136
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81016c8672a6baef0800000000000000
+      internalID: -95866249564254184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entrenadores pokemon_3
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 432
+        width: 136
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b27a21a0e3232caf0800000000000000
+      internalID: -377684176707344597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entrenadores pokemon_4
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 432
+        width: 136
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48be82c5c56743e70800000000000000
+      internalID: 9094023686623128452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entrenadores pokemon_5
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 432
+        width: 136
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9010eaee1d44c1e0800000000000000
+      internalID: -2178531524555566949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entrenadores pokemon_6
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 432
+        width: 136
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d85a76f3e2ebe59a0800000000000000
+      internalID: -6242342927647398515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entrenadores pokemon_7
+      rect:
+        serializedVersion: 2
+        x: 1072
+        y: 432
+        width: 136
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43aef112cc276d3f0800000000000000
+      internalID: -876386856422348236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entrenadores pokemon_8
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 216
+        width: 136
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3946ba86f63d7fd20800000000000000
+      internalID: 3312348526405182611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entrenadores pokemon_9
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 208
+        width: 136
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 991595cebe82cda60800000000000000
+      internalID: 7700074456644407705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entrenadores pokemon_10
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 208
+        width: 136
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f247c15b344cac6f0800000000000000
+      internalID: -663502200003333073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entrenadores pokemon_11
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 208
+        width: 136
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3af346e62d3dfc2d0800000000000000
+      internalID: -3256151104816922717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entrenadores pokemon_12
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 208
+        width: 136
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af4bbaf70506e3b60800000000000000
+      internalID: 7727719909469959418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entrenadores pokemon_13
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 208
+        width: 136
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21c446e15a4136fd0800000000000000
+      internalID: -2350011881145218030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entrenadores pokemon_14
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 208
+        width: 304
+        height: 208
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb919bade822692d0800000000000000
+      internalID: -3272390082287822405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entrenadores pokemon_15
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 8
+        width: 136
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ee84a89011d454a0800000000000000
+      internalID: -6605424884235071775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entrenadores pokemon_16
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 8
+        width: 136
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 820594a1d437eca00800000000000000
+      internalID: 778686560572362792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entrenadores pokemon_17
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 8
+        width: 136
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c327d4f9b39a6a60800000000000000
+      internalID: 7668103742437663681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entrenadores pokemon_18
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 8
+        width: 136
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7649f51a2ccfc8f30800000000000000
+      internalID: 4579312833990202471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entrenadores pokemon_19
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 8
+        width: 136
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92c7925080bfb7520800000000000000
+      internalID: 2701028413403659305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
