@@ -11,6 +11,7 @@ public class Trainer : MonoBehaviour, Interactable
     public event Action<bool> OnStartBattle;
     public int trainerId;
     public bool defeated = false;
+    public GameObject obstacle;
 
     public void Interact() {
         // this class implements the abstract method Interact
@@ -27,10 +28,18 @@ public class Trainer : MonoBehaviour, Interactable
 
     public void isDefeated() {
         defeated = true;
+
+        if(defeated){
+            Destroy(obstacle);
+        }
     }
 
     public void setDefeated(bool defeated){
         this.defeated = defeated;
+
+          if(defeated){
+            Destroy(obstacle);
+        }
     }
 
 }
