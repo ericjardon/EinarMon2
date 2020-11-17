@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
         if (state == GameState.Roaming){
             Menu.gameObject.SetActive(false);
             playerController.HandleUpdate();
+            InventoryUI.SetActive(true);
         }
         else if (state == GameState.Battling){
             Menu.gameObject.SetActive(false);
