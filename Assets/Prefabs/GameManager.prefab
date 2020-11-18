@@ -232,8 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c836e4ee088c14408fd8f33ba415e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  path: C:\Users\ericj\Documents\Unity\SavedGames\MyGame.bin
-  numOfTrainers: 2
+  numOfTrainers: 1
 --- !u!114 &5828143318943438069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,7 +251,6 @@ MonoBehaviour:
   - {fileID: 5828143318313278850}
   - {fileID: 5828143317971806211}
   trainers:
-  - {fileID: 0}
   - {fileID: 0}
 --- !u!1 &5828143319980807555
 GameObject:
@@ -300,5 +298,5 @@ MonoBehaviour:
   pokemons:
   - _base: {fileID: 11400000, guid: 859f8767b9752b342bc98a3a52f76afa, type: 2}
     level: 15
-  - _base: {fileID: 11400000, guid: 015227cfa7c2b8b4c951010fb63fe7fd, type: 2}
-    level: 6
+  - _base: {fileID: 11400000, guid: f49a83d05b34f50449893e11fd62f8dc, type: 2}
+    level: 10
