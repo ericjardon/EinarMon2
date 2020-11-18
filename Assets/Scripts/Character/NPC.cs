@@ -10,7 +10,7 @@ public class NPC : MonoBehaviour, Interactable
     [SerializeField] Pokemon GiftPokemon;  
    
    public void Interact(){
-       if (GiftPokemon != null){
+       if (GiftPokemon != null && GiftPokemon.pBase != null){
            StartCoroutine(DialogManager.Instance.DisplayDialog(giftDialog, false));
            Debug.Log("NPC giving pokemon...");
            GameObject.FindGameObjectWithTag("Player").GetComponent<Team>().ReceivePokemon(GiftPokemon);
