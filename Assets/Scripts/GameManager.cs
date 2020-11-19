@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState {
     Roaming,
@@ -12,6 +13,8 @@ public enum GameState {
 public class GameManager : MonoBehaviour
 {
     public GameState state;
+
+    public GameObject lastRival;
 
     [SerializeField] Player playerController;
     [SerializeField] BattleSystem battleSystem;
@@ -69,11 +72,22 @@ public class GameManager : MonoBehaviour
 
     void EndBattle(bool playerWon) {
         // cambiamos el estado, desactivamos BattleSystem, activamos camara principal
-        state = GameState.Roaming;
-        battleSystem.gameObject.SetActive(false);
-        mapCamera.gameObject.SetActive(true);
-        InventoryUI.SetActive(true);
+        if (!playerWon){
+            // recargar la escena
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
 
+        } else {
+            state = GameState.Roaming;
+            battleSystem.gameObject.SetActive(false);
+            mapCamera.gameObject.SetActive(true);
+            InventoryUI.SetActive(true);
+
+            if (GameObject.FindWithTag("FinalBoss").GetComponent<Trainer>().defeated){
+                lastRival.SetActive(true);
+            }
+        }
+  
     }
 
     void Update() {

@@ -611,7 +611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4082367430151454166
 Transform:
   m_ObjectHideFlags: 0
@@ -641,9 +641,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainMenu: {fileID: 4082367430151454161}
-  loader: {fileID: 2893113399352968008, guid: 31b251c0c555a954590514ec9efebea0, type: 3}
+  loader: {fileID: 0}
   mapCamera: {fileID: 0}
-  manager: {fileID: 5828143318943438065, guid: 964c67fda48bd9b42a2f73eb6022d73d, type: 3}
+  manager: {fileID: 0}
 --- !u!1 &4082367430172359538
 GameObject:
   m_ObjectHideFlags: 0

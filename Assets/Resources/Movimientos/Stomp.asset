@@ -15,6 +15,6 @@ MonoBehaviour:
   moveName: Stomp
   description: 
   type: 5
-  power: 75
+  power: 85
   accuracy: 75
-  pp: 10
+  pp: 20

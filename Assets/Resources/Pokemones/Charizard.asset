@@ -16,13 +16,13 @@ MonoBehaviour:
   description: "Charizard\t"
   front: {fileID: 21300000, guid: d819d29c71518d340b52028b17af51c2, type: 3}
   back: {fileID: 21300000, guid: 4e7023cd378451d4d80b1c653bb62ff7, type: 3}
-  type: 2
-  maxHP: 1
-  attack: 10
-  defense: 10
-  spAttack: 10
-  spDefense: 10
-  speed: 10
+  type: 4
+  maxHP: 450
+  attack: 500
+  defense: 300
+  spAttack: 100
+  spDefense: 400
+  speed: 700
   learnableMoves:
-  - moveBase: {fileID: 11400000, guid: 88435ae81882d784ab2e06298cfcc981, type: 2}
+  - moveBase: {fileID: 11400000, guid: 63153b7646651a644958f7ffb0240f12, type: 2}
     atLevel: 1

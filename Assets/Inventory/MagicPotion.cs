@@ -13,7 +13,7 @@ public class MagicPotion : MonoBehaviour
 
      public void TeleportPlayerTrainer(){
 
-     player.position= new Vector2(0.5f,80f);
+     player.position= new Vector2(13.5f,11.8f);
      Destroy(gameObject);      
 
      }

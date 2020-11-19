@@ -86,7 +86,7 @@ public class BattleSystem : MonoBehaviour
         teamScreen.Init();
 
         dialogB.SetMoveNames(playerU.pkmn.Moves); 
-        yield return dialogB.TD($"Rival Bakortega has challenged you to battle");   
+        yield return dialogB.TD($"Rival has challenged you to battle");   
         yield return new WaitForSeconds(1f);   
         PlayerAction();
     }
@@ -112,7 +112,6 @@ public class BattleSystem : MonoBehaviour
     }
 
     IEnumerator ExcecutePlayerMoveDuel(){
-        Debug.Log("Execute player move duel");
         state = BattleState.Busy;
         var move =playerU.pkmn.Moves[currentMove];
         move.PP --; // reducir el PP del movimiento y actualizar en HUD
@@ -122,18 +121,18 @@ public class BattleSystem : MonoBehaviour
 
         yield return enemyH.AffectHP();
         if (isDefeated){
-            Debug.Log("Rival pokemon defeated.");
             yield return dialogB.TD($"{enemyU.pkmn.pBase.GetPName} was defeated");
             // aquí llamaríamos a la animación
             yield return new WaitForSeconds(2f);
 
             if (enemyTeam.GetAlivePokemon() != null){
-                Debug.Log("Sending out rival pokemon");
                 // El jugador puede escoger el siguiente pokemon a sacar
                 state = BattleState.Busy;
                 StartCoroutine(SwitchRivalPkmn(enemyTeam.GetAlivePokemon()));
             }else{
                 enemyTeam.gameObject.GetComponent<Trainer>().isDefeated();
+                yield return dialogB.TD("Rival: What just happened?");
+                yield return new WaitForSeconds(2.0f);
                 OnDefeat(true);     // jugador ganó la pelea
             }
         }
@@ -167,6 +166,8 @@ public class BattleSystem : MonoBehaviour
                 // El jugador puede escoger el siguiente pokemon a sacar
                 ViewTeamScreen();
             }else{
+                yield return dialogB.TD("You have met your fate. Game Over.");
+                yield return new WaitForSeconds(3.0f);
                 OnDefeat(false);     // si no quedan pokemon vivos, el jugador pierde la pelea
             }    
         }
