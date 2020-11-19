@@ -16,7 +16,7 @@ MonoBehaviour:
   description: 'Burrito del copacabana
 
 '
-  type: 1
+  type: 3
   power: 80
   accuracy: 50
   pp: 20

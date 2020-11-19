@@ -30,5 +30,3 @@ MonoBehaviour:
     atLevel: 2
   - moveBase: {fileID: 11400000, guid: 087d92652c7243542ad05000e6d1b2a8, type: 2}
     atLevel: 2
-  - moveBase: {fileID: 11400000, guid: 087d92652c7243542ad05000e6d1b2a8, type: 2}
-    atLevel: 2

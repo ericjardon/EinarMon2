@@ -40,5 +40,4 @@ public class TeamManager : MonoBehaviour
             trainers[i].setDefeated(trainersDefeated[i]);
         }
     }
-
 }

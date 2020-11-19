@@ -17,12 +17,16 @@ MonoBehaviour:
   front: {fileID: 21300000, guid: 303338dc534b61c4192458bf515e718c, type: 3}
   back: {fileID: 21300000, guid: 2baf476038f9e6d44a85bae5f659eb4e, type: 3}
   type: 2
-  maxHP: 129
-  attack: 10
+  maxHP: 140
+  attack: 40
   defense: 88
   spAttack: 1
   spDefense: 1
   speed: 30
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 94ae1709c4636d44690eca24541f20f0, type: 2}
+    atLevel: 1
+  - moveBase: {fileID: 11400000, guid: 46a34ed3b8fe1224f80cee9d30bb7b49, type: 2}
+    atLevel: 1
+  - moveBase: {fileID: 11400000, guid: 087d92652c7243542ad05000e6d1b2a8, type: 2}
     atLevel: 1

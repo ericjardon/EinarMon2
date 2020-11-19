@@ -17,7 +17,7 @@ MonoBehaviour:
   front: {fileID: 21300000, guid: 2ceab6ba4fcd235498667f1f9d49344b, type: 3}
   back: {fileID: 21300000, guid: 3391941c495bfed479f318b9ddb6ee42, type: 3}
   type: 8
-  maxHP: 224
+  maxHP: 270
   attack: 80
   defense: 45
   spAttack: 70

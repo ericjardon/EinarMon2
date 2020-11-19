@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00e98ff64b149d439f1cd0356e04780, type: 3}
+  m_Name: Blastoise
+  m_EditorClassIdentifier: 
+  pkmnName: Blastoise
+  description: An Einarmon from the region of Kanto
+  front: {fileID: 21300000, guid: 163cdf30ffc80c34d918ea83ab5e762f, type: 3}
+  back: {fileID: 21300000, guid: 612b6aa88e95291469e1d96088ebc649, type: 3}
+  type: 7
+  maxHP: 700
+  attack: 800
+  defense: 900
+  spAttack: 300
+  spDefense: 1000
+  speed: 400
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 6cb09462bcac43840b6ca769e30bb734, type: 2}
+    atLevel: 1

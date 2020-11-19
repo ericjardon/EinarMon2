@@ -73,7 +73,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.3333334, y: 1.5}
+    oldSize: {x: 1.0625, y: 1.4375}
     newSize: {x: 1.3333334, y: 1.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -121,7 +121,7 @@ SpriteRenderer:
   m_SortingLayerID: -572997413
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6793540789062311968, guid: 56c83c694a71b0f45a3d2ec48992a924,
+  m_Sprite: {fileID: -6242342927647398515, guid: 2ff18240ddac73d49b1d428bff2aa0a7,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -150,8 +150,12 @@ MonoBehaviour:
     - I see you want to fight. Let's do this.
   defeatDialog:
     lines:
-    - Well...
-    - You won. Nice. What more do you want?
+    - Impossible! You won? You must be cheating.
+    - No matter. Neither you or me are the strongest ones out here. You will find
+      out...
+  trainerId: 0
+  defeated: 0
+  obstacle: {fileID: 0}
 --- !u!114 &2826841647162591713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +169,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pokemons:
-  - _base: {fileID: 11400000, guid: 069ace5eb8452e64188b99b64815982a, type: 2}
-    level: 5
-  - _base: {fileID: 11400000, guid: 1f83cb8320abc874fbed8a795a639f84, type: 2}
-    level: 10
+  - _base: {fileID: 11400000, guid: dce610d219b5e054a97dfd3e0a1d12f5, type: 2}
+    level: 18
+  - _base: {fileID: 11400000, guid: 859f8767b9752b342bc98a3a52f76afa, type: 2}
+    level: 20
+  - _base: {fileID: 11400000, guid: 015227cfa7c2b8b4c951010fb63fe7fd, type: 2}
+    level: 29
+  - _base: {fileID: 11400000, guid: d220a1dae36c60a41970538f3c209905, type: 2}
+    level: 35
