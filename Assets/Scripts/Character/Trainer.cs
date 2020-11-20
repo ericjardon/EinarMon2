@@ -12,6 +12,7 @@ public class Trainer : MonoBehaviour, Interactable
     public int trainerId;
     public bool defeated = false;
     public GameObject obstacle;
+    public bool isFinalRival;
 
     public void Interact() {
         // this class implements the abstract method Interact
@@ -30,16 +31,21 @@ public class Trainer : MonoBehaviour, Interactable
         defeated = true;
 
         if(defeated){
+            if (isFinalRival){
+                Debug.Log("Is the final boss");
+            }
             Destroy(obstacle);
         }
+        
     }
 
     public void setDefeated(bool defeated){
         this.defeated = defeated;
 
-          if(defeated){
+        if(defeated){
             Destroy(obstacle);
         }
+        
     }
 
 }

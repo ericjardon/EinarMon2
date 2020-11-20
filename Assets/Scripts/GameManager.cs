@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
         this.rival = rival;
     }
 
+
     void EndBattle(bool playerWon) {
         // cambiamos el estado, desactivamos BattleSystem, activamos camara principal
         if (!playerWon){
