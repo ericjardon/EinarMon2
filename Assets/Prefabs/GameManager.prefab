@@ -1,5 +1,59 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1913560912050129561
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4035804903132220260}
+  - component: {fileID: 3004926368111126001}
+  m_Layer: 0
+  m_Name: Team4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4035804903132220260
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913560912050129561}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5828143318943438070}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3004926368111126001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913560912050129561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e8338a6fb9bca43b68d6f9d6b06e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pokemons:
+  - _base: {fileID: 11400000, guid: 859f8767b9752b342bc98a3a52f76afa, type: 2}
+    level: 15
+  - _base: {fileID: 11400000, guid: f49a83d05b34f50449893e11fd62f8dc, type: 2}
+    level: 17
+  - _base: {fileID: 11400000, guid: 015227cfa7c2b8b4c951010fb63fe7fd, type: 2}
+    level: 26
+  - _base: {fileID: 11400000, guid: 5ff01ee8387bd7645aaebcfce9845d0c, type: 2}
+    level: 32
+  - _base: {fileID: 11400000, guid: aa440206f0c3bea4a8fd54701fdc97d7, type: 2}
+    level: 100
 --- !u!1 &5715395789293947242
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,6 +237,7 @@ Transform:
   - {fileID: 5828143318313278877}
   - {fileID: 5828143317971806210}
   - {fileID: 4685120340512793787}
+  - {fileID: 4035804903132220260}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -199,6 +254,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 3
+  lastRival: {fileID: 0}
+  finalScreen: {fileID: 0}
   playerController: {fileID: 0}
   battleSystem: {fileID: 0}
   rival: {fileID: 0}
