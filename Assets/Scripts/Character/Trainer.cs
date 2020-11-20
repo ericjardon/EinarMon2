@@ -28,18 +28,18 @@ public class Trainer : MonoBehaviour, Interactable
 
     public void isDefeated() {
         defeated = true;
-
         if(defeated){
             Destroy(obstacle);
         }
+        
     }
 
     public void setDefeated(bool defeated){
         this.defeated = defeated;
-
-          if(defeated){
+        if(defeated){
             Destroy(obstacle);
         }
+        
     }
 
 }

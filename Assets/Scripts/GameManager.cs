@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameState state;
 
     public GameObject lastRival;
+    public GameObject finalScreen;
 
     [SerializeField] Player playerController;
     [SerializeField] BattleSystem battleSystem;
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Camera mapCamera;
     [SerializeField] GameObject InventoryUI;
     [SerializeField] StartMenu Menu;
+    
 
     void Start() {
         // Aquí indicamos a qué eventos emitidos por otras clases nos estamos suscribiendo
@@ -70,6 +72,11 @@ public class GameManager : MonoBehaviour
         this.rival = rival;
     }
 
+    public void sendMenu(){
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+    }
+
     void EndBattle(bool playerWon) {
         // cambiamos el estado, desactivamos BattleSystem, activamos camara principal
         if (!playerWon){
@@ -83,8 +90,12 @@ public class GameManager : MonoBehaviour
             mapCamera.gameObject.SetActive(true);
             InventoryUI.SetActive(true);
 
-            if (GameObject.FindWithTag("FinalBoss").GetComponent<Trainer>().defeated){
-                lastRival.SetActive(true);
+            if (GameObject.FindWithTag("DefinitiveRival").GetComponent<Trainer>().defeated){
+                state = GameState.Menu;
+                battleSystem.gameObject.SetActive(false);
+                mapCamera.gameObject.SetActive(false);
+                InventoryUI.SetActive(false);
+                finalScreen.SetActive(true);
             }
         }
   
