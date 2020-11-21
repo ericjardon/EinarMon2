@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     void Start() {
         // Aquí indicamos a qué eventos emitidos por otras clases nos estamos suscribiendo
         // i.e. 'Escuchando'
+    
         playerController.OnStartBattle += Battle;
         battleSystem.OnDefeat += EndBattle;
         DialogManager.Instance.OnStartDialog += () => {
